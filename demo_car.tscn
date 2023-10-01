@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfxc46soa2oxt"]
+
+[ext_resource type="Script" path="res://demo_car.gd" id="1_0k1qy"]
+[ext_resource type="PackedScene" uid="uid://buk1tefeak5op" path="res://van.tscn" id="2_ew14m"]
+[ext_resource type="Script" path="res://Camera_Follow.gd" id="3_pxdm7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bibgo"]
+bounce = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c8sgx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dweh"]
+
+[node name="DemoCar" type="Node3D"]
+script = ExtResource("1_0k1qy")
+sphere_offset = Vector3(0, -1, 0)
+acceleration = 30
+steering = 23
+turn_speed = 4
+
+[node name="Ball" type="RigidBody3D" parent="."]
+mass = 0.8
+physics_material_override = SubResource("PhysicsMaterial_bibgo")
+angular_damp = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_c8sgx")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Ball"]
+visible = false
+radius = 1.0
+material = SubResource("StandardMaterial3D_6dweh")
+
+[node name="van" parent="." instance=ExtResource("2_ew14m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="van"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+target_position = Vector3(0, -2, 0)
+collide_with_areas = true
+
+[node name="camTarget" type="Node3D" parent="van"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37843, 0.491136)
+
+[node name="Camera3D" type="Camera3D" parent="van/camTarget"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 0.657493, 3.60418)
+current = true
+script = ExtResource("3_pxdm7")

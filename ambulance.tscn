@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvf0jk72aoxsa"]
+
+[ext_resource type="PackedScene" uid="uid://bl3q6pnrbkgom" path="res://_assets/vehicle models/ambulance.glb" id="1_0tckw"]
+
+[node name="ambulance" instance=ExtResource("1_0tckw")]

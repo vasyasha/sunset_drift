@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://de0pb6syjb2hu"]
+
+[ext_resource type="Texture2D" uid="uid://cepaed3qxmhna" path="res://_assets/HDRI/greysky.jpg" id="1_567be"]
+[ext_resource type="PackedScene" uid="uid://dfxc46soa2oxt" path="res://demo_car.tscn" id="1_d4wk6"]
+[ext_resource type="PackedScene" uid="uid://lpb1cdug8jbi" path="res://racetrack_01.tscn" id="2_sqmjb"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_d7d7u"]
+panorama = ExtResource("1_567be")
+
+[sub_resource type="Sky" id="Sky_5e3k2"]
+sky_material = SubResource("PanoramaSkyMaterial_d7d7u")
+
+[sub_resource type="Environment" id="Environment_sefrk"]
+background_mode = 2
+sky = SubResource("Sky_5e3k2")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gcr38"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00172186, 0, -0.00529957)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sefrk")
+camera_attributes = SubResource("CameraAttributesPractical_gcr38")
+
+[node name="Racetrack02" parent="." instance=ExtResource("2_sqmjb")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 15.6729, 0, 0)
+
+[node name="DemoCar" parent="." instance=ExtResource("1_d4wk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+acceleration = 10
+steering = 15
+turn_speed = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.241, 9.48, -0.264)
+projection = 1
+fov = 119.9
+size = 30.0
